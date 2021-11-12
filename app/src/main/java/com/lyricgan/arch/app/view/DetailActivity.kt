@@ -11,10 +11,11 @@ import com.lyricgan.arch.app.databinding.ActivityDetailBinding
  */
 class DetailActivity : AppCompatActivity(), DetailContract.View {
     override lateinit var presenter: DetailContract.Presenter
+    private lateinit var viewBinding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewBinding = ActivityDetailBinding.inflate(layoutInflater)
+        viewBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
     }
 
