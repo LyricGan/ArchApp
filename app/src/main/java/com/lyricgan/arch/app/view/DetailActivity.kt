@@ -10,6 +10,7 @@ import com.lyricgan.arch.app.databinding.ActivityDetailBinding
  * @author Lyric Gan
  */
 class DetailActivity : AppCompatActivity(), DetailContract.View {
+    override lateinit var presenter: DetailContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +18,12 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         setContentView(viewBinding.root)
     }
 
-    override fun setPresenter(presenter: DetailContract.Presenter) {
+    override fun showLoading() {
+    }
 
+    override fun showContent() {
+    }
+
+    override fun showMessage() {
     }
 }

@@ -6,5 +6,5 @@ package com.lyricgan.arch.app
  */
 interface BaseView<T> {
 
-    fun setPresenter(presenter : T)
+    var presenter : T
 }
