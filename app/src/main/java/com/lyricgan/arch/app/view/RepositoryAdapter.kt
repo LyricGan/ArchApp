@@ -15,9 +15,15 @@ import com.lyricgan.arch.app.model.RepositoryItem
  */
 class RepositoryAdapter(private val context: Context): RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
     private var items: List<RepositoryItem>? = null
+    private var callback: Callback? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
-        return RepositoryViewHolder(LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false))
+        val itemView = LayoutInflater.from(context).inflate(R.layout.item_layout, parent, false)
+        val viewHolder = RepositoryViewHolder(itemView)
+        viewHolder.viewBinding.layoutContent.setOnClickListener {
+            callback?.onItemClick(viewHolder.item)
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
@@ -27,9 +33,7 @@ class RepositoryAdapter(private val context: Context): RecyclerView.Adapter<Repo
         holder.viewBinding.tvForks.text = item?.getForksStr()
         holder.viewBinding.tvWatchers.text = item?.getWatchersStr()
         holder.viewBinding.tvStars.text = item?.getStarsStr()
-        holder.viewBinding.layoutContent.setOnClickListener {
-
-        }
+        holder.item = item
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +44,17 @@ class RepositoryAdapter(private val context: Context): RecyclerView.Adapter<Repo
         this.items = items
     }
 
+    fun setCallback(callback: Callback) {
+        this.callback = callback
+    }
+
     inner class RepositoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val viewBinding: ItemLayoutBinding = ItemLayoutBinding.bind(itemView)
+        var item: RepositoryItem? = null
+    }
+
+    interface Callback {
+
+        fun onItemClick(item : RepositoryItem?)
     }
 }

@@ -1,6 +1,7 @@
 package com.lyricgan.arch.app.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.KeyEvent
@@ -64,6 +65,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
             val repositoryAdapter = RepositoryAdapter(this)
             repositoryAdapter.setItems(repositoryItems)
+            repositoryAdapter.setCallback(object : RepositoryAdapter.Callback {
+                override fun onItemClick(item: RepositoryItem?) {
+                    val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                    intent.putExtra("params", item)
+                    startActivity(intent)
+                }
+            })
             viewBinding.recyclerView.adapter = repositoryAdapter
         }
     }

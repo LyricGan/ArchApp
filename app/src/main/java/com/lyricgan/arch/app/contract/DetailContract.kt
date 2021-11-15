@@ -2,6 +2,7 @@ package com.lyricgan.arch.app.contract
 
 import com.lyricgan.arch.app.BasePresenter
 import com.lyricgan.arch.app.BaseView
+import com.lyricgan.arch.app.model.UserItem
 
 /**
  * 详情需要实现的接口
@@ -13,13 +14,13 @@ interface DetailContract {
 
         fun showLoading()
 
-        fun showContent()
+        fun showUser(userItem: UserItem)
 
-        fun showMessage()
+        fun showMessage(message: String)
     }
 
     interface Presenter : BasePresenter {
 
-        fun getDetail(url: String)
+        fun loadUser(url: String)
     }
 }

@@ -2,6 +2,7 @@ package com.lyricgan.arch.app.presenter
 
 import com.lyricgan.arch.app.contract.DetailContract
 import com.lyricgan.arch.app.model.DetailRepository
+import com.lyricgan.arch.app.model.UserItem
 
 /**
  * 详情Presenter
@@ -19,7 +20,16 @@ class DetailPresenter(
     override fun start() {
     }
 
-    override fun getDetail(url: String) {
+    override fun loadUser(url: String) {
+        view.showLoading()
+        repository.loadUser(url, object : DetailRepository.ResponseCallback {
+            override fun onFailed() {
+                view.showMessage("请求失败")
+            }
 
+            override fun onSuccess(userItem: UserItem) {
+                view.showUser(userItem)
+            }
+        })
     }
 }

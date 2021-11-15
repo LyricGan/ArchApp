@@ -25,11 +25,7 @@ class MainRepository {
             override fun onResponse(call: Call, response: Response) {
                 if (response.isSuccessful) {
                     val str = response.body?.string()
-                    if (str == null) {
-                        callback.onFailed()
-                        return
-                    }
-                    callback.onSuccess(parseItems(str))
+                    str?.let { callback.onSuccess(parseItems(it)) } ?: callback.onFailed()
                 } else {
                     callback.onFailed()
                 }
@@ -57,6 +53,15 @@ class MainRepository {
         item.watchers = jsonObject.optInt("watchers_count")
         item.stars = jsonObject.optInt("stargazers_count")
         item.forks = jsonObject.optInt("forks_count")
+        item.homepage = jsonObject.optString("html_url")
+        val ownerObject = jsonObject.optJSONObject("owner")
+        ownerObject?.let {
+            val userItem = UserItem()
+            userItem.id = it.optLong("id")
+            userItem.name = it.optString("name")
+            userItem.url = it.optString("url")
+            item.owner = userItem
+        }
     }
 
     interface RepositoryCallback {
