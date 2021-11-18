@@ -27,13 +27,14 @@ class RepositoryAdapter(private val context: Context): RecyclerView.Adapter<Repo
     }
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
-        val item = items?.get(position)
-        holder.viewBinding.tvName.text = item?.name
-        holder.viewBinding.tvDescription.text = item?.description
-        holder.viewBinding.tvForks.text = item?.getForksStr()
-        holder.viewBinding.tvWatchers.text = item?.getWatchersStr()
-        holder.viewBinding.tvStars.text = item?.getStarsStr()
-        holder.item = item
+        items?.get(position)?.let {
+            holder.viewBinding.tvName.text = it.name
+            holder.viewBinding.tvDescription.text = it.description
+            holder.viewBinding.tvWatchers.text = it.getWatchersStr()
+            holder.viewBinding.tvStars.text = it.getStarsStr()
+            holder.viewBinding.tvForks.text = it.getForksStr()
+            holder.item = it
+        }
     }
 
     override fun getItemCount(): Int {

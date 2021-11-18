@@ -60,8 +60,8 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         viewBinding.tvName.text = item.name
         viewBinding.tvDescription.text = item.description
         viewBinding.tvHomepage.text = item.homepage
-        viewBinding.tvForks.text = item.getForksStr()
         viewBinding.tvWatchers.text = item.getWatchersStr()
+        viewBinding.tvForks.text = item.getForksStr()
         viewBinding.tvStars.text = item.getStarsStr()
     }
 }
