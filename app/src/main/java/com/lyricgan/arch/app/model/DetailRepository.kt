@@ -32,9 +32,9 @@ class DetailRepository {
         })
     }
 
-    fun parseUser(str: String) : UserItem {
-        val jsonObject = JSONObject(str)
+    private fun parseUser(str: String) : UserItem {
         val userItem = UserItem()
+        val jsonObject = JSONObject(str)
         userItem.id = jsonObject.optLong("id")
         userItem.name = jsonObject.optString("name")
         userItem.url = jsonObject.optString("url")
