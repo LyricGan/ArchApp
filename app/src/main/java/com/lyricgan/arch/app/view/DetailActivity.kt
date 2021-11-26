@@ -18,15 +18,13 @@ import com.lyricgan.arch.app.presenter.DetailPresenter
 class DetailActivity : AppCompatActivity(), DetailContract.View {
     override lateinit var presenter: DetailContract.Presenter
     private lateinit var viewBinding: ActivityDetailBinding
-    private lateinit var repository: DetailRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        repository = DetailRepository()
-        presenter = DetailPresenter(this, repository)
+        presenter = DetailPresenter(this, DetailRepository())
 
         val item: RepositoryItem? = intent.getParcelableExtra("params")
         item?.let {

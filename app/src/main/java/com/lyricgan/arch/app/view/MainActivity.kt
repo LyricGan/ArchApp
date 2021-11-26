@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override lateinit var presenter: MainContract.Presenter
 
     private lateinit var viewBinding: ActivityMainBinding
-    private lateinit var repository: MainRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +48,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         val recyclerView = viewBinding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        repository = MainRepository()
-        presenter = MainPresenter(this, repository)
+        presenter = MainPresenter(this, MainRepository())
     }
 
     override fun showLoading() {
