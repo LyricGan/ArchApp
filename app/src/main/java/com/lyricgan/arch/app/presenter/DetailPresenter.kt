@@ -24,7 +24,7 @@ class DetailPresenter(
         view.showLoading()
         repository.loadUser(url, object : DetailRepository.ResponseCallback {
             override fun onFailed() {
-                view.showMessage("请求失败")
+                view.showLoadFailed()
             }
 
             override fun onSuccess(userItem: UserItem) {

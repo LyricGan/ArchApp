@@ -2,4 +2,5 @@
     <string name="app_name">ArchApp</string>
 
     <string name="input_name_hint">输入要搜索的用户名</string>
+    <string name="request_failed">请求失败</string>
 </resources>

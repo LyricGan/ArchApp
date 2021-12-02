@@ -16,7 +16,7 @@ interface MainContract {
 
         fun showContent(repositoryItems: List<RepositoryItem>)
 
-        fun showMessage(message: String)
+        fun showLoadFailed()
     }
 
     interface Presenter : BasePresenter {

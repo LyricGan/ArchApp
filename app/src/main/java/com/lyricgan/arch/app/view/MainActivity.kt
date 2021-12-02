@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.lyricgan.arch.app.R
 import com.lyricgan.arch.app.contract.MainContract
 import com.lyricgan.arch.app.databinding.ActivityMainBinding
 import com.lyricgan.arch.app.model.MainRepository
@@ -74,10 +75,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         }
     }
 
-    override fun showMessage(message: String) {
+    override fun showLoadFailed() {
         runOnUiThread {
             viewBinding.progress.visibility = View.GONE
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.request_failed, Toast.LENGTH_SHORT).show()
         }
     }
 }

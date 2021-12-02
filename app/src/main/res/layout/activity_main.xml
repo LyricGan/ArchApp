@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:ellipsize="end"
         android:hint="@string/input_name_hint"
         android:imeOptions="actionSearch"
         android:inputType="text"
@@ -19,7 +18,7 @@
         android:paddingEnd="8dp"
         android:textColor="@color/black_2"
         android:textColorHint="@color/gray_2"
-        android:textSize="15sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.lyricgan.arch.app.R
 import com.lyricgan.arch.app.contract.DetailContract
 import com.lyricgan.arch.app.databinding.ActivityDetailBinding
 import com.lyricgan.arch.app.model.DetailRepository
@@ -47,10 +48,10 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
         }
     }
 
-    override fun showMessage(message: String) {
+    override fun showLoadFailed() {
         runOnUiThread {
             viewBinding.progress.visibility = View.GONE
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.request_failed, Toast.LENGTH_SHORT).show()
         }
     }
     

@@ -24,7 +24,7 @@ class MainPresenter(
         view.showLoading()
         repository.search(name, object : MainRepository.RepositoryCallback {
             override fun onFailed() {
-                view.showMessage("请求失败")
+                view.showLoadFailed()
             }
 
             override fun onSuccess(items: List<RepositoryItem>) {
