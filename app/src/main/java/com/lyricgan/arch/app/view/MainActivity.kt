@@ -53,25 +53,23 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showLoading() {
-        viewBinding.progress.visibility = View.VISIBLE
-        viewBinding.recyclerView.visibility = View.GONE
+        showViews(true)
     }
 
     override fun showContent(repositoryItems: List<RepositoryItem>) {
         runOnUiThread {
-            viewBinding.progress.visibility = View.GONE
-            viewBinding.recyclerView.visibility = View.VISIBLE
+            showViews(false)
 
-            val repositoryAdapter = RepositoryAdapter(this)
-            repositoryAdapter.setItems(repositoryItems)
-            repositoryAdapter.setCallback(object : RepositoryAdapter.Callback {
+            val adapter = RepositoryAdapter(this)
+            adapter.setItems(repositoryItems)
+            adapter.setCallback(object : RepositoryAdapter.Callback {
                 override fun onItemClick(item: RepositoryItem?) {
                     val intent = Intent(this@MainActivity, DetailActivity::class.java)
                     intent.putExtra("params", item)
                     startActivity(intent)
                 }
             })
-            viewBinding.recyclerView.adapter = repositoryAdapter
+            viewBinding.recyclerView.adapter = adapter
         }
     }
 
@@ -79,6 +77,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         runOnUiThread {
             viewBinding.progress.visibility = View.GONE
             Toast.makeText(this, R.string.request_failed, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showViews(loading: Boolean) {
+        viewBinding.apply {
+            if (loading) {
+                progress.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            } else {
+                progress.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
         }
     }
 }
