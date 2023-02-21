@@ -2,9 +2,7 @@ package com.lyricgan.arch.app.view
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.lyricgan.arch.app.R
 import com.lyricgan.arch.app.contract.DetailContract
 import com.lyricgan.arch.app.databinding.ActivityDetailBinding
 import com.lyricgan.arch.app.model.DetailRepository
@@ -38,11 +36,13 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
 
     override fun showLoading() {
         viewBinding.progress.visibility = View.VISIBLE
+        viewBinding.tvHint.visibility = View.GONE
     }
 
     override fun showUser(userItem: UserItem) {
         runOnUiThread {
             viewBinding.progress.visibility = View.GONE
+            viewBinding.tvHint.visibility = View.GONE
             viewBinding.tvOwnerName.text = userItem.name
             viewBinding.tvOwnerHomepage.text = userItem.homepage
         }
@@ -51,7 +51,7 @@ class DetailActivity : AppCompatActivity(), DetailContract.View {
     override fun showLoadFailed() {
         runOnUiThread {
             viewBinding.progress.visibility = View.GONE
-            Toast.makeText(this, R.string.request_failed, Toast.LENGTH_SHORT).show()
+            viewBinding.tvHint.visibility = View.VISIBLE
         }
     }
     

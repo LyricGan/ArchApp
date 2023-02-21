@@ -9,11 +9,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lyricgan.arch.app.R
 import com.lyricgan.arch.app.contract.MainContract
 import com.lyricgan.arch.app.databinding.ActivityMainBinding
 import com.lyricgan.arch.app.model.MainRepository
@@ -34,8 +32,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     viewBinding.editText.text.toString().let {
-                        val inputMethodManager: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                        inputMethodManager.hideSoftInputFromWindow(viewBinding.editText.windowToken, 0)
+                        hideSoftInput()
                         if (!TextUtils.isEmpty(it)) {
                             presenter.search(it)
                         }
@@ -76,12 +73,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun showLoadFailed() {
         runOnUiThread {
             viewBinding.progress.visibility = View.GONE
-            Toast.makeText(this, R.string.request_failed, Toast.LENGTH_SHORT).show()
+            viewBinding.tvHint.visibility = View.VISIBLE
         }
+    }
+    
+    private fun hideSoftInput() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(viewBinding.editText.windowToken, 0)
     }
 
     private fun showViews(loading: Boolean) {
         viewBinding.apply {
+            tvHint.visibility = View.GONE
             if (loading) {
                 progress.visibility = View.VISIBLE
                 recyclerView.visibility = View.GONE

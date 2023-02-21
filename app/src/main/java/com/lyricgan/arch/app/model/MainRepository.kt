@@ -49,7 +49,7 @@ class MainRepository {
     private fun parseItem(item: RepositoryItem, jsonObject: JSONObject) {
         item.id = jsonObject.optLong("id")
         item.name = jsonObject.optString("name")
-        item.description = jsonObject.optString("description")
+        item.description = jsonObject.optString("description", "")
         item.watchers = jsonObject.optInt("watchers_count")
         item.stars = jsonObject.optInt("stargazers_count")
         item.forks = jsonObject.optInt("forks_count")

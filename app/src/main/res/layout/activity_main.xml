@@ -14,6 +14,7 @@
         android:imeOptions="actionSearch"
         android:inputType="text"
         android:maxLines="1"
+        android:minHeight="50dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:textColor="@color/black_2"
@@ -40,4 +41,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/load_failed"
+        android:textColor="@color/gray_2"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
